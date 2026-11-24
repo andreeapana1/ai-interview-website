@@ -16,7 +16,7 @@ from google import genai
 from google.genai import types
 
 MODEL = "gemini-3.5-flash-lite"
-FALLBACK_MODELS = ["gemini-3.8-flash"]
+FALLBACK_MODELS = ["gemini-3.5-flash", "gemini-3.8-flash"]
 TOPICS_FILE = Path(__file__).parent / "topics.md"
 
 # Readable names and links for the source files listed in topics.md
@@ -140,9 +140,11 @@ def client():
 def ask_gemini(system, prompt, temperature, rounds=6):  # prompt: text or a list of parts
     """Gemini's free tier often answers '503 high demand' for a few seconds at a time, so retry
     a few rounds (main model, then fallback) with short pauses before giving up."""
-    last_error = None
+    errors = []
     for attempt in range(rounds):
         for model in [MODEL] + FALLBACK_MODELS:
+            if model in exhausted_today():
+                continue
             try:
                 r = client().models.generate_content(
                     model=model,
@@ -153,11 +155,21 @@ def ask_gemini(system, prompt, temperature, rounds=6):  # prompt: text or a list
                     ss.models_used.add(model)
                     return r.text.strip()
             except Exception as e:  # noqa: BLE001 - try again / try the next model
-                last_error = e
+                errors.append(e)
                 if "429" in str(e) and "PerDay" in str(e):
-                    continue  # daily quota of this model used up: go straight to the next one
+                    exhausted_today()[model] = True  # daily quota used up: skip this model from now on
         time.sleep(2 + 2 * attempt)
-    raise last_error or RuntimeError("The model returned an empty answer.")
+    if not errors:
+        raise RuntimeError("The model returned an empty answer.")
+    # Report the most useful error: being overloaded is temporary, so prefer that over a fallback's quota.
+    overloaded = [e for e in errors if any(s in str(e) for s in ("503", "504", "UNAVAILABLE", "DEADLINE"))]
+    raise (overloaded or errors)[-1]
+
+
+@st.cache_resource(ttl=6 * 3600)
+def exhausted_today():
+    """Models whose free daily quota is used up (shared by all visitors, forgotten after 6 hours)."""
+    return {}
 
 
 def make_question(topic, level):
@@ -247,10 +259,14 @@ def new_question(code, level):
 def explain(error):
     msg = str(error)
     print(f"[api error] {type(error).__name__}: {msg[:500]}", flush=True)  # visible in the app logs
-    if "429" in msg or "RESOURCE_EXHAUSTED" in msg:
-        return "The free Gemini quota is used up for now. Wait a minute, then press **Try again**."
     if any(s in msg for s in ("503", "504", "UNAVAILABLE", "DEADLINE", "timed out", "Timeout")):
-        return "Google's AI service is overloaded right now. Wait a moment, then press **Try again**."
+        return ("Google's free AI service is overloaded right now (this is on Google's side). "
+                "Your answer is saved: wait about a minute, then press **Try again**.")
+    if "429" in msg or "RESOURCE_EXHAUSTED" in msg:
+        if "PerDay" in msg:
+            return ("Today's free Gemini quota is used up. It resets at 09:00 Danish time; "
+                    "your answer is saved, so you can press **Try again** later.")
+        return "Too many requests in the last minute. Wait a minute, then press **Try again**."
     return f"The AI service returned an error: {msg[:300]}"
 
 

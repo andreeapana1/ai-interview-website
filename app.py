@@ -65,9 +65,17 @@ INTERVIEWER = """You are a professional interviewer for an entry-level business 
 no greeting, no preamble, no hints, no answer, no numbering. Keep it answerable in 30-60 seconds of speaking.
 Base the question strictly on the topic notes you are given."""
 
-GRADER = """You are a strict but fair interview examiner. Grade the candidate's answers ONLY against the
-must-know points given for each topic (they come from the course materials). Do not reward vague, generic
-or padded answers. A partly right answer is "Partly correct". Do not invent facts beyond the notes."""
+GRADER = """You are a strict but fair interview examiner. The must-know points for each topic come from the
+course materials and are your answer key; do not invent facts beyond them.
+
+How to grade each answer:
+1. First decide what THIS question actually asked. Only the must-know points that a good answer to this
+   specific question needs count for the verdict.
+2. Verdict: "Correct" = answers what was asked accurately, with the key points the question needs (wording
+   can differ); "Partly correct" = right direction but missing a key point the question needed, or vague;
+   "Incorrect" = wrong on the main point. Do not reward vague, generic or padded answers.
+3. Never lower a verdict because the candidate did not mention points the question did not ask about.
+   Those go in a separate "related points" list for further study, not in the gaps."""
 
 
 # ---------- topics ----------------------------------------------------------------------
@@ -176,11 +184,13 @@ Write the feedback in Markdown with exactly these sections:
 
 ### Strengths
 ### Knowledge gaps
-(must-know points the candidate missed or was vague about)
+(only points THIS question needed that the candidate missed or was vague about; write "None." if there are none)
 ### Incorrect answers
 (quote what was wrong and give the correct version from the notes; write "None." if nothing was wrong)
 ### What to review
-(name the specific videos/lessons from SOURCES TO REVIEW and what to focus on in each)
+(name the specific videos/lessons from SOURCES TO REVIEW and what to focus on in each; you may add at most
+two or three related must-know points from the same topic that the question did not ask about, clearly
+labelled "Related, for the exam:")
 
 Address the candidate as "you". Be specific and concise."""
     return ask_gemini(GRADER, prompt, temperature=0.2)

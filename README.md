@@ -4,9 +4,9 @@ A simple web app that interviews you for an entry-level business position involv
 
 1. It asks a **basic question** and waits for your answer.
 2. It asks a **harder, applied question** and waits for your answer.
-3. It gives **feedback**: a verdict per question, strengths, knowledge gaps, incorrect answers and what to review.
+3. It gives **feedback**: a verdict per question, strengths, knowledge gaps, incorrect answers, what to review (with links to the course videos and lessons) and a **model answer** for each question.
 
-You can download the full transcript at the end.
+You can answer **by voice** (recorded in the browser and transcribed by Gemini; you can correct the text before sending), like in an oral exam, or by typing. You can download the full transcript at the end.
 
 ## How it works
 

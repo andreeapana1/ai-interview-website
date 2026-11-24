@@ -19,46 +19,54 @@ MODEL = "gemini-3.5-flash-lite"
 FALLBACK_MODELS = ["gemini-3.8-flash"]
 TOPICS_FILE = Path(__file__).parent / "topics.md"
 
-# Readable names for the source files listed in topics.md
-SOURCE_TITLES = {
-    "00-foundations-karpathy": "Karpathy – Deep Dive into LLMs like ChatGPT",
-    "01-how-llms-work": "IBM – How Large Language Models Work",
-    "02-ai-machine-learning-and-generative-ai": "IBM – AI, Machine Learning, Deep Learning and Generative AI Explained",
-    "03-transformers": "IBM – What are Transformers?",
-    "04-context-windows": "IBM – What is a Context Window?",
-    "05-hallucinations": "IBM – Why Large Language Models Hallucinate",
-    "06-probabilistic-versus-deterministic-outcomes": "IBM – AI Agents vs Business Rules",
-    "07-embeddings": "IBM – What are Word Embeddings?",
-    "08-vector-databases": "IBM – What is a Vector Database?",
-    "09-retrieval-augmented-generation-rag": "IBM – What is Retrieval-Augmented Generation?",
-    "10-prompt-versus-context-engineering": "IBM – Context Engineering vs. Prompt Engineering",
-    "11-tool-calling": "IBM – What is Tool Calling?",
-    "12-mcp-and-apis": "IBM – MCP vs API",
-    "13-ai-agents": "IBM – What are AI Agents?",
-    "14-business-workflows": "IBM – Building AI Agents for Real-World Problems & Workflows",
-    "15-agent-skills": "IBM – What AI Agent Skills Are and How They Work",
-    "16-memory": "IBM – The Four Types of Memory Every AI Agent Needs",
-    "17-reasoning-models": "IBM – What Are Large Reasoning Models?",
-    "18-complete-ai-systems": "IBM – What Is an AI Stack?",
-    "19-prompt-injection": "IBM – What Is a Prompt Injection Attack?",
-    "20-benchmarks": "IBM – What are Large Language Model Benchmarks?",
-    "21-evaluating-ai-outputs": "IBM – LLM as a Judge",
-    "22-explainability": "IBM – What is Explainable AI?",
-    "23-synthetic-data": "IBM – What is Synthetic Data?",
-    "24-selecting-business-applications": "IBM – Select the right AI use case for your business",
-    "01-intro": "Anthropic Academy – Intro to AI Capabilities and Limitations",
-    "02-what-we-mean-by-ai": "Anthropic Academy – What We Mean by AI",
-    "03-how-ai-gets-its-character": "Anthropic Academy – How AI Gets Its Character",
-    "04-next-token-prediction": "Anthropic Academy – Next Token Prediction",
-    "05-next-token-prediction-try-it-out": "Anthropic Academy – Next Token Prediction: Try it out",
-    "06-knowledge": "Anthropic Academy – Knowledge",
-    "07-knowledge-try-it-out": "Anthropic Academy – Knowledge: Try it out",
-    "08-working-memory": "Anthropic Academy – Working Memory",
-    "10-steerability": "Anthropic Academy – Steerability",
-    "11-steerability-try-it-out": "Anthropic Academy – Steerability: Try it out",
-    "12-when-properties-collide": "Anthropic Academy – When Properties Collide",
-    "13-next-steps": "Anthropic Academy – Next Steps",
+# Readable names and links for the source files listed in topics.md
+YT = "https://www.youtube.com/watch?v="
+CO = "https://www.coursera.org/learn/ai-capabilities-and-limitations/supplement/"
+SOURCES = {
+    "00-foundations-karpathy": ("Karpathy – Deep Dive into LLMs like ChatGPT", YT + "7xTGNNLPyMI"),
+    "01-how-llms-work": ("IBM – How Large Language Models Work", YT + "5sLYAQS9sWQ"),
+    "02-ai-machine-learning-and-generative-ai": ("IBM – AI, Machine Learning, Deep Learning and Generative AI Explained", YT + "qYNweeDHiyU"),
+    "03-transformers": ("IBM – What are Transformers?", YT + "ZXiruGOCn9s"),
+    "04-context-windows": ("IBM – What is a Context Window?", YT + "-QVoIxEpFkM"),
+    "05-hallucinations": ("IBM – Why Large Language Models Hallucinate", YT + "cfqtFvWOfg0"),
+    "06-probabilistic-versus-deterministic-outcomes": ("IBM – AI Agents vs Business Rules", YT + "i1ZmNUbRGD4"),
+    "07-embeddings": ("IBM – What are Word Embeddings?", YT + "wgfSDrqYMJ4"),
+    "08-vector-databases": ("IBM – What is a Vector Database?", YT + "t9IDoenf-lo"),
+    "09-retrieval-augmented-generation-rag": ("IBM – What is Retrieval-Augmented Generation?", YT + "T-D1OfcDW1M"),
+    "10-prompt-versus-context-engineering": ("IBM – Context Engineering vs. Prompt Engineering", YT + "vD0E3EUb8-8"),
+    "11-tool-calling": ("IBM – What is Tool Calling?", YT + "h8gMhXYAv1k"),
+    "12-mcp-and-apis": ("IBM – MCP vs API", YT + "7j1t3UZA1TY"),
+    "13-ai-agents": ("IBM – What are AI Agents?", YT + "F8NKVhkZZWI"),
+    "14-business-workflows": ("IBM – Building AI Agents for Real-World Problems & Workflows", YT + "4Vg2aVtrX8k"),
+    "15-agent-skills": ("IBM – What AI Agent Skills Are and How They Work", YT + "Lg-meK5IU8Q"),
+    "16-memory": ("IBM – The Four Types of Memory Every AI Agent Needs", YT + "BacJ6sEhqMo"),
+    "17-reasoning-models": ("IBM – What Are Large Reasoning Models?", YT + "enLbj0igyx4"),
+    "18-complete-ai-systems": ("IBM – What Is an AI Stack?", YT + "RRKwmeyIc24"),
+    "19-prompt-injection": ("IBM – What Is a Prompt Injection Attack?", YT + "jrHRe9lSqqA"),
+    "20-benchmarks": ("IBM – What are Large Language Model Benchmarks?", YT + "kDY4TodQwbg"),
+    "21-evaluating-ai-outputs": ("IBM – LLM as a Judge", YT + "trfUBIDeI1Y"),
+    "22-explainability": ("IBM – What is Explainable AI?", YT + "jFHPEQi55Ko"),
+    "23-synthetic-data": ("IBM – What is Synthetic Data?", YT + "HIusawrGBN4"),
+    "24-selecting-business-applications": ("IBM – Select the right AI use case for your business", YT + "C1ecR-sIE1A"),
+    "01-intro": ("Anthropic Academy – Intro to AI Capabilities and Limitations", CO + "FOlHR/intro-to-ai-capabilities-and-limitations"),
+    "02-what-we-mean-by-ai": ("Anthropic Academy – What We Mean by AI", CO + "MNWkJ/what-we-mean-by-ai"),
+    "03-how-ai-gets-its-character": ("Anthropic Academy – How AI Gets Its Character", CO + "a40yi/how-ai-gets-its-character"),
+    "04-next-token-prediction": ("Anthropic Academy – Next Token Prediction", CO + "sywWv/next-token-prediction"),
+    "05-next-token-prediction-try-it-out": ("Anthropic Academy – Next Token Prediction: Try it out", CO + "IYbol/try-it-out"),
+    "06-knowledge": ("Anthropic Academy – Knowledge", CO + "kJU1l/knowledge"),
+    "07-knowledge-try-it-out": ("Anthropic Academy – Knowledge: Try it out", CO + "MJfsF/try-it-out"),
+    "08-working-memory": ("Anthropic Academy – Working Memory", CO + "fA8L2/working-memory"),
+    "09-working-memory-try-it-out": ("Anthropic Academy – Working Memory: Try it out", CO + "SYbjK/try-it-out"),
+    "10-steerability": ("Anthropic Academy – Steerability", CO + "RF2HH/steerability"),
+    "11-steerability-try-it-out": ("Anthropic Academy – Steerability: Try it out", CO + "aNUsk/try-it-out"),
+    "12-when-properties-collide": ("Anthropic Academy – When Properties Collide", CO + "1rFbn/when-properties-collide"),
+    "13-next-steps": ("Anthropic Academy – Next Steps", CO + "tvirg/next-steps"),
 }
+
+
+def source_link(key):
+    title, url = SOURCES[key]
+    return f"[{title}]({url})"
 
 INTERVIEWER = """You are a professional interviewer for an entry-level business position that involves AI
 (e.g. junior business analyst). The candidate is a business student. Write ONE interview question only:
@@ -92,13 +100,12 @@ def load_topics():
         block = block.split("\n---")[0]
         src = re.search(r"- Source: (.+)", block)
         files = re.findall(r"(?:transcripts|coursera)/([\w-]+)\.md", src.group(1) if src else "")
+        if src and "Karpathy" in src.group(1):
+            files.append("00-foundations-karpathy")
         sources = []
         for f in files:
-            title = SOURCE_TITLES.get(f)
-            if title and title not in sources:
-                sources.append(title)
-        if src and "Karpathy" in src.group(1) and SOURCE_TITLES["00-foundations-karpathy"] not in sources:
-            sources.append(SOURCE_TITLES["00-foundations-karpathy"])
+            if f in SOURCES and source_link(f) not in sources:
+                sources.append(source_link(f))
         points = block.split("- Must-know:", 1)[1] if "- Must-know:" in block else block
         points = points.split("- Levels:")[0].strip()
         topics[code] = {"name": name, "section": code[0], "sources": sources, "points": points}
@@ -130,7 +137,7 @@ def client():
     )
 
 
-def ask_gemini(system, prompt, temperature, rounds=6):
+def ask_gemini(system, prompt, temperature, rounds=6):  # prompt: text or a list of parts
     """Gemini's free tier often answers '503 high demand' for a few seconds at a time, so retry
     a few rounds (main model, then fallback) with short pauses before giving up."""
     last_error = None
@@ -164,6 +171,16 @@ def make_question(topic, level):
     return ask_gemini(INTERVIEWER, prompt, temperature=0.9)
 
 
+def transcribe(audio_bytes, mime_type):
+    """Speech-to-text with Gemini (it accepts audio directly)."""
+    parts = [
+        types.Part.from_bytes(data=audio_bytes, mime_type=mime_type),
+        "Transcribe this spoken interview answer word for word in English. Output only the transcript, "
+        "without comments. If nothing intelligible is said, output exactly: [no speech]",
+    ]
+    return ask_gemini(None, parts, temperature=0)
+
+
 def make_feedback(qas):
     parts = []
     for i, qa in enumerate(qas, 1):
@@ -188,9 +205,13 @@ Write the feedback in Markdown with exactly these sections:
 ### Incorrect answers
 (quote what was wrong and give the correct version from the notes; write "None." if nothing was wrong)
 ### What to review
-(name the specific videos/lessons from SOURCES TO REVIEW and what to focus on in each; you may add at most
-two or three related must-know points from the same topic that the question did not ask about, clearly
-labelled "Related, for the exam:")
+(one bullet per source from SOURCES TO REVIEW: copy the Markdown link exactly as given, then say what to
+focus on; you may add at most two or three related must-know points from the same topic that the question
+did not ask about, clearly labelled "Related, for the exam:")
+### Model answers
+(for each question, a strong spoken-style answer of 3-5 sentences that a top candidate would give in about
+45 seconds, using only facts from the must-know points and the course's own key terms in **bold**;
+start each with "**Q<number>:**" and leave a blank line between them)
 
 Address the candidate as "you". Be specific and concise."""
     return ask_gemini(GRADER, prompt, temperature=0.2)
@@ -215,6 +236,7 @@ ss.setdefault("models_used", set())
 
 def reset():
     ss.stage, ss.qas, ss.feedback, ss.models_used, ss.pending = "start", [], "", set(), None
+    ss.draft, ss.heard = "", None
 
 
 def new_question(code, level):
@@ -245,8 +267,9 @@ if ss.stage == "start" and not ss.pending:
     st.markdown(
         "You are applying for an **entry-level business position that involves AI**. "
         "The interviewer will ask **two questions**, one at a time: first a basic one, then a harder applied one. "
-        "Answer each in your own words (3–6 sentences). After your second answer you get feedback on your "
-        "strengths, knowledge gaps and incorrect answers, plus what to review."
+        "Answer each in your own words (3–6 sentences), **by voice** like in the oral exam, or by typing. "
+        "After your second answer you get feedback on your strengths, knowledge gaps and incorrect answers, "
+        "links to what to review, and a model answer for each question."
     )
     if st.button("Start interview", type="primary"):
         q1, q2 = pick_two(load_topics())
@@ -260,7 +283,7 @@ for i, qa in enumerate(ss.qas, 1):
         st.markdown(f"**Question {i} of 2**\n\n{qa['question']}")
     if qa["answer"]:
         with st.chat_message("user"):
-            st.markdown(qa["answer"])
+            st.markdown(("🎙️ *(spoken)* " if qa.get("spoken") else "") + qa["answer"])
 
 if ss.pending:
     label, action, next_stage = STEPS[ss.pending]
@@ -274,11 +297,41 @@ if ss.pending:
         st.button("Try again", type="primary")  # any click reruns the page, which retries the step
         st.stop()
 
+def submit(text, spoken=False):
+    ss.qas[-1]["answer"] = text.strip()
+    ss.qas[-1]["spoken"] = spoken
+    ss.draft = ""
+    ss.pending = "q2" if ss.stage == "q1" else "feedback"
+
+
 if ss.stage in ("q1", "q2"):
-    answer = st.chat_input("Type your answer and press Enter")
+    # Option 1: speak the answer (closest to the oral exam). Gemini transcribes it; the candidate can
+    # correct the transcript before sending.
+    n = len(ss.qas)
+    audio = st.audio_input("🎙️ Answer by voice: press the microphone, speak, press stop", key=f"audio_{n}")
+    if audio is not None:
+        data = audio.getvalue()
+        if ss.get("heard") != (n, len(data)):  # transcribe each new recording once
+            try:
+                with st.spinner("Transcribing your answer…"):
+                    ss.draft = transcribe(data, audio.type or "audio/wav")
+                ss.heard = (n, len(data))
+            except Exception as e:  # noqa: BLE001
+                st.error(explain(e) + " (or type your answer below)")
+        if ss.get("draft"):
+            if ss.draft.strip() == "[no speech]":
+                st.warning("No speech was recognised. Please record again, closer to the microphone.")
+            else:
+                text = st.text_area("Check the transcription (you can correct it), then send:", ss.draft,
+                                    key=f"draft_{n}_{ss.heard[1]}", height=150)
+                if st.button("Send answer", type="primary"):
+                    submit(text, spoken=True)
+                    st.rerun()
+
+    # Option 2: type the answer
+    answer = st.chat_input("…or type your answer and press Enter")
     if answer and answer.strip():
-        ss.qas[-1]["answer"] = answer.strip()
-        ss.pending = "q2" if ss.stage == "q1" else "feedback"
+        submit(answer)
         st.rerun()
 
 if ss.stage == "done":
@@ -290,7 +343,7 @@ if ss.stage == "done":
              f"Website version · model: {models} (Google Gemini API)", ""]
     for i, qa in enumerate(ss.qas, 1):
         lines += [f"**Interviewer (Question {i}, {qa['topic']['name']}):** {qa['question']}", "",
-                  f"**Candidate:** {qa['answer']}", ""]
+                  f"**Candidate{' (spoken, transcribed)' if qa.get('spoken') else ''}:** {qa['answer']}", ""]
     lines += ["**Interviewer:** That's the end of the interview. Here is your feedback.", "", ss.feedback]
     c1, c2 = st.columns(2)
     c1.download_button("Download transcript", "\n".join(lines), file_name="interview-transcript.md",
